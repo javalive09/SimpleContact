@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+<color name="back_white">#ffffff</color>
+<color name="back_gray">#E08080A0</color>
+<color name="back_cyan">#00ffff</color>
+<color name="back_setting">#E0f0f0f0</color>
+<color name="text_black">#000000</color>
+<color name="back_black">#000000</color>
+<color name="back_green">#00ff00</color>
+<color name="info_back">#f0f0ff</color>
+<color name="text_white">#ffffff</color>
+<color name="text_green">#00ff00</color>
+<color name="text_blue">#0000ff</color>
+<color name="back_sblue">#EFF9FF</color>
+<color name="back_selectblue">#EFF9FF</color>
+<color name="title_text">#FFFFFF</color>
+<color name="title_back_ground">#202020</color>
+<color name="back_lightGray">#A8A8A8</color>
+<color name="text_sv_color">#334C80</color>
+<color name="text_gray">#E08080A0</color>
+<color name="tv_text">#9BDAF2</color>
+<color name="remo_back">#141E25</color>
+<color name="transparent">#00000000</color>
+<color name="border">#448080A0</color>
+<color name="dialog_bg">#A0808080</color>
+<color name="item_text">#FF666666</color>
+<color name="firstword_text">#CCCCCC</color>
+<color name="half_transparent">#60000000</color>
+
+</resources>
+         

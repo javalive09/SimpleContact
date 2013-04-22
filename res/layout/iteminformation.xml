@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1" >
+
+    <View
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:focusableInTouchMode="true" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="@string/name"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:inputType="text"
+            android:textSize="18sp" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="@string/number"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/number"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:inputType="phone"
+            android:textSize="18sp" />
+    </TableRow>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom"
+        android:stretchColumns="*" >
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/save"
+                android:gravity="center"
+                android:text="@string/save"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/back"
+                android:gravity="center"
+                android:text="@string/back"
+                android:textSize="18sp" />
+        </TableRow>
+    </TableLayout>
+
+</TableLayout>

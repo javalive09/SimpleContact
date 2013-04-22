@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="App_name">轻便通讯簿</string>
+    <string name="delete">删除</string>
+    <string name="modify">修改</string>
+    <string name="call">拨打电话</string>
+    <string name="sms">发送短信</string>
+    <string name="name">姓名</string>
+    <string name="number">电话</string>
+    <string name="save">保存</string>
+    <string name="back">返回</string>
+    <string name="dialog_title">保存信息</string>
+    <string name="dialog_message">请稍等…</string>
+    <string name="add">增加联系人</string>
+    <string name="edit">编辑联系人</string>
+    <string name="add_success">新增操作成功</string>
+    <string name="modify_success">修改操作成功</string>
+    <string name="delete_success">删除操作成功</string>
+
+</resources>

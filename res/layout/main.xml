@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*" >
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/add"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/add"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/edit"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/edit"
+                android:textSize="18sp" />
+        </TableRow>
+    </TableLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="@android:color/black"
+        android:dividerHeight="2dp"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="true"
+        android:scrollbarStyle="outsideInset"
+        android:scrollingCache="false" />
+
+</LinearLayout>

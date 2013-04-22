@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.peter.simplecontact"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="4" />
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:name=".SimpleContactApplication"
+        android:icon="@drawable/icon"
+        android:label="@string/App_name" >
+
+        <!-- 单元测试 -->
+        <uses-library android:name="android.test.runner" />
+
+        <!-- 对外数据共享，authorities 相当于主机名字。取名规则：公司名.providers.xxx -->
+        <provider
+            android:name=".access.contentprovider.PersonProvider"
+            android:authorities="com.peter.providers.personprovider" />
+
+        <activity
+            android:name=".view.MainView"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.ItemView"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name=".view.ItemView" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+
+    <!-- instrumentation框架  ，单元测试环境配置 -->
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:label="Test for App"
+        android:targetPackage="com.peter.simplecontact" />
+
+</manifest>
