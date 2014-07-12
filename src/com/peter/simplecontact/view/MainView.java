@@ -50,56 +50,52 @@ import java.util.List;
 public class MainView extends Activity implements OnClickListener,
         OnLongClickListener, ListView.OnScrollListener , OnTouchListener{
 
-    private static final String TAG = "MainView";
-    private ListView informationList;
-    private LinearLayout firstWordOverLayView;
-    private TextView firstWordTextView;
-    private WindowManager mWindowManager;
-    private PersonAdapter adapter;
-    private Button add , edit;
+    private static final String TAG = MainView.class.getSimpleName();
     private static final int ITEMVIEW = 1;
     private static final int NEEDREFRESH = 1;
-    
-    private Animation slideRightOut;
-    private Animation slideLeftIn;
-    private boolean showAnima = false;
-    private boolean showIcion = false;
+    private ListView mInformationList;
+    private LinearLayout mFirstWordOverLayView;
+    private TextView mFirstWordTextView;
+    private WindowManager mWindowManager;
+    private PersonAdapter mAdapter;
+    private Button mAdd , mEdit;
+    private Animation mSlideRightOut;
+    private Animation mSlideLeftIn;
+    private boolean mShowAnima = false;
+    private boolean mShowIcion = false;
 
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
         System.out.println("Main thread="+Thread.currentThread().getId());
-        // show first word overlay view on the window
-        firstWordOverLayView = (LinearLayout) LayoutInflater.from(this).inflate(
+        mFirstWordOverLayView = (LinearLayout) LayoutInflater.from(this).inflate(
                 R.layout.wordhintview,
                 null);
-        firstWordTextView = (TextView) firstWordOverLayView.findViewById(R.id.hint);
+        mFirstWordTextView = (TextView) mFirstWordOverLayView.findViewById(R.id.hint);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams(LayoutParams.FILL_PARENT,
                 LayoutParams.FILL_PARENT, WindowManager.LayoutParams.TYPE_APPLICATION,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                         | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, PixelFormat.TRANSLUCENT);
         mWindowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        mWindowManager.addView(firstWordOverLayView, lp);
+        mWindowManager.addView(mFirstWordOverLayView, lp);
 
-        informationList = (ListView) findViewById(R.id.list);
+        mInformationList = (ListView) findViewById(R.id.list);
         List<Person> persons = SimpleContactApplication.getDBController().findAll();
-        add = (Button) findViewById(R.id.add);
-        edit = (Button) findViewById(R.id.edit);//增加动画效果
-        add.setOnClickListener(this);
-        edit.setOnClickListener(this);
+        mAdd = (Button) findViewById(R.id.add);
+        mEdit = (Button) findViewById(R.id.edit);//增加动画效果
+        mAdd.setOnClickListener(this);
+        mEdit.setOnClickListener(this);
 
-        adapter = new PersonAdapter((Person[]) persons.toArray(new Person[persons
+        mAdapter = new PersonAdapter((Person[]) persons.toArray(new Person[persons
                 .size()]), R.layout.listviewitem);
-        informationList.setAdapter(adapter);
-        informationList.setOnScrollListener(this);
-        informationList.setOnTouchListener(this);
+        mInformationList.setAdapter(mAdapter);
+        mInformationList.setOnScrollListener(this);
+        mInformationList.setOnTouchListener(this);
         
         //增加动画
-        slideRightOut = AnimationUtils.loadAnimation(MainView.this, R.anim.push_right_out);
-        slideLeftIn = AnimationUtils.loadAnimation(MainView.this, R.anim.push_left_in);
+        mSlideRightOut = AnimationUtils.loadAnimation(MainView.this, R.anim.push_right_out);
+        mSlideLeftIn = AnimationUtils.loadAnimation(MainView.this, R.anim.push_left_in);
     }
 
     /**
@@ -161,10 +157,10 @@ public class MainView extends Activity implements OnClickListener,
     public boolean dispatchTouchEvent(MotionEvent ev) {
         boolean b = super.dispatchTouchEvent(ev);
 
-        if (needShowOverLay(informationList)) {
-            firstWordOverLayView.setVisibility(View.VISIBLE);
+        if (needShowOverLay(mInformationList)) {
+            mFirstWordOverLayView.setVisibility(View.VISIBLE);
         } else {
-            firstWordOverLayView.setVisibility(View.INVISIBLE);
+            mFirstWordOverLayView.setVisibility(View.INVISIBLE);
         }
 
         return b;
@@ -222,9 +218,9 @@ public class MainView extends Activity implements OnClickListener,
             startActivityForResult(intent, ITEMVIEW);
             return;
         }else if(v.getId() == R.id.edit){
-            showAnima = true;//滚动listview时屏蔽动画效果，按键后才有动画效果
-            showIcion = !showIcion;
-            adapter.notifyDataSetChanged();
+            mShowAnima = true;//滚动listview时屏蔽动画效果，按键后才有动画效果
+            mShowIcion = !mShowIcion;
+            mAdapter.notifyDataSetChanged();
             return;
         }
 
@@ -283,18 +279,18 @@ public class MainView extends Activity implements OnClickListener,
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        showAnima = false;
+        mShowAnima = false;
     }
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
             int totalItemCount) {
-        if (firstWordOverLayView.getVisibility() == View.VISIBLE) {
+        if (mFirstWordOverLayView.getVisibility() == View.VISIBLE) {
             int center = firstVisibleItem + visibleItemCount / 2;
-            Person currentPerson = (Person) adapter.getItem(center);
+            Person currentPerson = (Person) mAdapter.getItem(center);
             String currentWord = currentPerson.getName().charAt(0) + "";
 
-            firstWordTextView.setText(currentWord);
+            mFirstWordTextView.setText(currentWord);
         }
     }
 
@@ -316,7 +312,7 @@ public class MainView extends Activity implements OnClickListener,
                                 person.getName() + getString(R.string.delete_success),
                                 Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
-                        adapter.updateData();
+                        mAdapter.updateData();
                     }
                 });
 
@@ -329,7 +325,7 @@ public class MainView extends Activity implements OnClickListener,
         switch (requestCode) {
             case ITEMVIEW:
                 if (resultCode == NEEDREFRESH) {
-                    adapter.updateData();
+                    mAdapter.updateData();
                 }
                 break;
 
@@ -340,7 +336,7 @@ public class MainView extends Activity implements OnClickListener,
 
     @Override
     protected void onDestroy() {
-        getWindowManager().removeView(firstWordOverLayView);
+        getWindowManager().removeView(mFirstWordOverLayView);
         super.onDestroy();
     }
 
@@ -434,15 +430,15 @@ public class MainView extends Activity implements OnClickListener,
             cache.item.setOnLongClickListener(MainView.this);
 
             //防止有的item（最下面的露出一点点的item）并没有new出来，导致显示不正确
-            if(showIcion){
+            if(mShowIcion){
                 cache.icon.setVisibility(View.VISIBLE);
-                if(showAnima){//显示动画效果
-                    cache.icon.startAnimation(slideLeftIn); 
+                if(mShowAnima){//显示动画效果
+                    cache.icon.startAnimation(mSlideLeftIn); 
                 }
             }else{
                 cache.icon.setVisibility(View.INVISIBLE);
-                if(showAnima){//显示动画效果
-                    cache.icon.startAnimation(slideRightOut);
+                if(mShowAnima){//显示动画效果
+                    cache.icon.startAnimation(mSlideRightOut);
                 }
             }
             
